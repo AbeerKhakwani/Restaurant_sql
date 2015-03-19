@@ -33,6 +33,12 @@
         return $app['twig']->render('cuisine.twig', array('cuisines' => $cuisine, 'restaurants'=>$cuisine->getRestaurants()));
     });
 
+    $app->post("/cuisine/{id}/edit", function($id) use ($app) {
+        $cuisine = Cuisine::find($id);
+        return $app['twig']->render('cuisine_edit.twig', array('cuisines' => $cuisine, 'restaurants'=>$cuisine->getRestaurants()));
+    });
+
+
     //Will assign the cuisine id to restaurant name and address
     $app->post("/cuisine/{id}", function($id) use ($app) {
        $cuisine = Cuisine::find($id);
@@ -54,7 +60,7 @@
     $app->post("/delete_restaurants/{id}", function($id) use ($app){
         $cuisine = Cuisine::find($id);
         Restaurant::deleteAll();
-        return $app['twig']->render('cuisine.twig', array('cuisines' =>         $cuisine,'restaurants'=>$cuisine->getRestaurants()));
+        return $app['twig']->render('cuisine.twig', array('cuisines' => $cuisine,'restaurants'=>$cuisine->getRestaurants()));
         });
 
 
