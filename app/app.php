@@ -33,7 +33,7 @@
         $cuisine = Cuisine::find($id);
         return $app['twig']->render('cuisine.twig', array('cuisines' => $cuisine, 'restaurants'=>$cuisine->getRestaurants()));
     });
-
+    //Will replace old cuisine type into the new cuisine type
     $app->patch("/cuisine/{id}", function($id) use ($app) {
         $cuisine = Cuisine::find($id);
         $type= $_POST['type'];
@@ -41,7 +41,7 @@
 
         return $app['twig']->render('cuisine.twig', array('cuisines' => $cuisine,'restaurants'=>$cuisine->getRestaurants()));
     });
-
+    //Will go to edit page to enter the new cuisine type
     $app->post("/cuisine/{id}/edit", function($id) use ($app) {
         $cuisine = Cuisine::find($id);
         return $app['twig']->render('cuisine_edit.twig', array('cuisines' => $cuisine, 'restaurants'=>$cuisine->getRestaurants()));
@@ -71,6 +71,12 @@
         Restaurant::deleteAll();
         return $app['twig']->render('cuisine.twig', array('cuisines' => $cuisine,'restaurants'=>$cuisine->getRestaurants()));
         });
+
+    $app->delete("/cuisine/{id}", function($id) use ($app) {
+        $cuisine = Cuisine::find($id);
+        $cuisine->delete();
+        return $app['twig']->render('index.twig', array('cuisines' => Cuisine::getAll()));
+    });
 
 
         return $app;

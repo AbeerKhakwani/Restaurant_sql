@@ -7,4 +7,9 @@
   <input id="type" name="type" type="text">
 
   <button type="submit">Update</button>
+  </form>
+
+  <form action="/cuisine/{{ cuisines.getId() }}" method="post">
+      <input name="_method" type="hidden" value="delete">
+      <button type="submit">Delete Category Name</button>
 </form>
