@@ -76,7 +76,7 @@ class Cuisine
     function update($new_type)
     {
         $GLOBALS['DB']->exec("UPDATE cuisine SET type = '{$new_type}' WHERE id = {$this->getId()};");
-        $this->setType($new_type);  
+        $this->setType($new_type);
     }
 }
 ?>

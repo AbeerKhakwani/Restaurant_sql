@@ -13,7 +13,8 @@
     $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/../views'
     ));
-
+    use Symfony\Component\HttpFoundation\Request;
+    Request::enableHttpMethodParameterOverride();
 
     //Takes us to the main page, shows us the listings of cuisines. Gives a form to list more cuisines.
     $app->get("/", function() use ($app) {
@@ -31,6 +32,14 @@
     $app->get("/cuisine/{id}", function($id) use ($app) {
         $cuisine = Cuisine::find($id);
         return $app['twig']->render('cuisine.twig', array('cuisines' => $cuisine, 'restaurants'=>$cuisine->getRestaurants()));
+    });
+
+    $app->patch("/cuisine/{id}", function($id) use ($app) {
+        $cuisine = Cuisine::find($id);
+        $type= $_POST['type'];
+        $cuisine->update($type);
+
+        return $app['twig']->render('cuisine.twig', array('cuisines' => $cuisine,'restaurants'=>$cuisine->getRestaurants()));
     });
 
     $app->post("/cuisine/{id}/edit", function($id) use ($app) {
