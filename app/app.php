@@ -49,10 +49,11 @@
             return $app['twig']->render('/index.twig', array('cuisines' => Cuisine::getAll()));
         });
 
-        $app->post("/delete_restaurants", function() use ($app){
-                Restaurant::deleteAll();
-                return $app['twig']->render('cuisine.twig', array('cuisines' => Restaurant::getAll()));
-            });
+    $app->post("/delete_restaurants/{id}", function($id) use ($app){
+        $cuisine = Cuisine::find($id);
+        Restaurant::deleteAll();
+        return $app['twig']->render('cuisine.twig', array('cuisines' => $cuisine,'restaurants'=>$cuisine->getRestaurants()));
+        });
 
 
 

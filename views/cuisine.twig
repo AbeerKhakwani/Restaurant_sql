@@ -40,7 +40,7 @@
         <p>
             <a href="/">Home</a>
         </p>
-        <form action="/delete_restaurants" method="post">
+        <form action="/delete_restaurants/{{ cuisines.getId() }}" method="post">
             <button type="submit">Delete Restaurants</button>
         </form>
 
