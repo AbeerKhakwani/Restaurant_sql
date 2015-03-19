@@ -139,29 +139,46 @@
 
 
                function testGetRestaurants(){
-                         //Arrange
-                         $name = "Work stuff";
-                         $id = null;
-                         $test_cuisine= new Cuisine($name, $id);
-                         $test_cuisine->save();
+                 //Arrange
+                 $name = "Work stuff";
+                 $id = null;
+                 $test_cuisine= new Cuisine($name, $id);
+                 $test_cuisine->save();
 
-                         $cuisine_id = $test_cuisine->getId();
-                         $name = "Email client";
-                         $address = "main street";
-                         $test_restaurant = new Restaurant($id, $name, $address, $cuisine_id);
-                         $test_restaurant->save();
+                 $cuisine_id = $test_cuisine->getId();
+                 $name = "Email client";
+                 $address = "main street";
+                 $test_restaurant = new Restaurant($id, $name, $address, $cuisine_id);
+                 $test_restaurant->save();
 
-                         $name2 = "Meet with boss";
-                         $address2 = "main stress";
-                         $test_restaurant2 = new Restaurant($id, $name2, $address2, $cuisine_id);
-                         $test_restaurant2->save();
+                 $name2 = "Meet with boss";
+                 $address2 = "main stress";
+                 $test_restaurant2 = new Restaurant($id, $name2, $address2, $cuisine_id);
+                 $test_restaurant2->save();
 
-                         //Act
-                         $result = $test_cuisine->getRestaurants();
+                 //Act
+                 $result = $test_cuisine->getRestaurants();
 
-                         //Assert
-                         $this->assertEquals([$test_restaurant, $test_restaurant2], $result);
-                     }
+                 //Assert
+                 $this->assertEquals([$test_restaurant, $test_restaurant2], $result);
+             }
+
+                 function testUpdate()
+                {
+                    //Arrange
+                    $type = "Work stuff";
+                    $id = 1;
+                    $test_cuisine = new Cuisine($type, $id);
+                    $test_cuisine->save();
+
+                    $new_type = "Home stuff";
+
+                    //Act
+                    $test_cuisine->update($new_type);
+
+                    //Assert
+                    $this->assertEquals("Home stuff", $test_cuisine->getType());
+                }
 
 
 

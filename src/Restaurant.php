@@ -52,6 +52,7 @@ class Restaurant
         $result    = $statement->fetch(PDO::FETCH_ASSOC);
         $this->setId($result['id']);
     }
+    
     static function getAll()
     {
         $result_food = $GLOBALS['DB']->query("SELECT * FROM restaurants;");

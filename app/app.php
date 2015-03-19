@@ -26,14 +26,14 @@
         $new_cuisine->save();
         return $app['twig']->render('index.twig', array('cuisines' => Cuisine::getAll()));
     });
+
     //So this takes an id that we pass to it and puts it into the find method which searchs through all the cusine objects  and if the id we pass matches the id of an object it returns it.
-
-
     $app->get("/cuisine/{id}", function($id) use ($app) {
         $cuisine = Cuisine::find($id);
         return $app['twig']->render('cuisine.twig', array('cuisines' => $cuisine, 'restaurants'=>$cuisine->getRestaurants()));
     });
 
+    //Will assign the cuisine id to restaurant name and address
     $app->post("/cuisine/{id}", function($id) use ($app) {
        $cuisine = Cuisine::find($id);
         $new_name_restaurant = $_POST['name'];
@@ -44,35 +44,20 @@
         return $app['twig']->render('cuisine.twig', array('cuisines' => $cuisine,'restaurants'=>$cuisine->getRestaurants()));
     });
 
+    //Will delete listings of cuisine types from the main page
     $app->post("/delete_cuisines", function() use ($app){
             Cuisine::deleteAll();
             return $app['twig']->render('/index.twig', array('cuisines' => Cuisine::getAll()));
         });
 
+        //Will delete listings with names and addresses from the restaurant page.
     $app->post("/delete_restaurants/{id}", function($id) use ($app){
         $cuisine = Cuisine::find($id);
         Restaurant::deleteAll();
-        return $app['twig']->render('cuisine.twig', array('cuisines' => $cuisine,'restaurants'=>$cuisine->getRestaurants()));
+        return $app['twig']->render('cuisine.twig', array('cuisines' =>         $cuisine,'restaurants'=>$cuisine->getRestaurants()));
         });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-return $app;
+        return $app;
 
 ?>

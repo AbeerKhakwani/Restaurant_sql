@@ -4,7 +4,6 @@
     </head>
     <body>
 
-
         <h1> Welcome to all types of Cuisine</h1>
         <p> What kind of food are you craving?</p>
 
@@ -20,7 +19,6 @@
         <p>Here all the cuisines</p>
 
         <ul>
-
                 {% for food in cuisines %}
                 <li><a href="/cuisine/{{ food.getId }}">{{ food.getType }}</a></li>
 
