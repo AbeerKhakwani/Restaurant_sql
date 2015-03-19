@@ -28,6 +28,7 @@
         return $app['twig']->render('index.twig', array('cuisines' => Cuisine::getAll()));
     });
 
+
     //So this takes an id that we pass to it and puts it into the find method which searchs through all the cusine objects  and if the id we pass matches the id of an object it returns it.
     $app->get("/cuisine/{id}", function($id) use ($app) {
         $cuisine = Cuisine::find($id);
